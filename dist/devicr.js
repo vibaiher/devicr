@@ -11,7 +11,8 @@ Devicr.prototype.loadImage = function(devicr_image) {
     image = (this.devicr_device.isPortrait() ? (this.devicr_device.isMobile() ? devicr_image.mobile() : devicr_image.tablet()) : devicr_image.desktop());
   }
   devicr_image.replaceImageLoadedBy(image);
-};;function DevicrDevice(device, screen_device) {
+};
+;function DevicrDevice(device, screen_device) {
   this.device = device;
   this.screen_device = screen_device;
 }
@@ -38,7 +39,8 @@ DevicrDevice.prototype.isPortrait = function() {
 
 DevicrDevice.prototype.isRetina = function() {
   return this.screen_device.getDevicePixelRatio() > 1;
-};;function DevicrImage(image) {
+};
+;function DevicrImage(image) {
   var createFallbackImage = function() {
     image.setAttribute('fallback', image.getAttribute('src'));
   };
@@ -66,7 +68,8 @@ DevicrImage.prototype.tablet = function() {
 
 DevicrImage.prototype.desktop = function() {
   return this.image.getAttribute('desktop');
-};;function ScreenDevice() {
+};
+;function ScreenDevice() {
 
 }
 
