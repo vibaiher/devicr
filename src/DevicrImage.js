@@ -32,3 +32,6 @@ DevicrImage.prototype.retina = function() {
   return this.image.getAttribute('retina');
 };
 
+DevicrImage.prototype.replaceImageLoadedBy = function(image_path) {
+  this.image.setAttribute('src', image_path);
+};

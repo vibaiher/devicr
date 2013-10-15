@@ -39,4 +39,12 @@ describe("DevicrImage", function() {
     expect(this.devicr_image.retina()).toEqual(this.retina_image);
   });
 
+  it("replaces current image for new image", function() {
+    new_image = "patata.jpeg";
+
+    this.devicr_image.replaceImageLoadedBy(new_image);
+    
+    expect(this.devicr_image.imageLoaded()).toEqual(new_image);
+  });
+
 });
