@@ -69,6 +69,11 @@ DevicrImage.prototype.tablet = function() {
 DevicrImage.prototype.desktop = function() {
   return this.image.getAttribute('desktop');
 };
+
+DevicrImage.prototype.retina = function() {
+  return this.image.getAttribute('retina');
+};
+
 ;function ScreenDevice() {
 
 }

@@ -7,12 +7,14 @@ describe("DevicrImage", function() {
     this.mobile_image = 'image.mobile.jpg';
     this.tablet_image = 'image.tablet.jpg';
     this.desktop_image = 'image.desktop.jpg';
+    this.retina_image = 'image.retina.jpg';
 
     this.image = new Image();
     this.image.setAttribute('src', this.fallback_image);
     this.image.setAttribute('mobile', this.mobile_image);
     this.image.setAttribute('tablet', this.tablet_image);
     this.image.setAttribute('desktop', this.desktop_image);
+    this.image.setAttribute('retina', this.retina_image);
 
     this.devicr_image = new DevicrImage(this.image);
   });
@@ -31,6 +33,10 @@ describe("DevicrImage", function() {
 
   it("has a special image for desktop devices", function() {
     expect(this.devicr_image.desktop()).toEqual(this.desktop_image);
+  });
+
+  it("has a special image for retina devices", function() {
+    expect(this.devicr_image.retina()).toEqual(this.retina_image);
   });
 
 });
