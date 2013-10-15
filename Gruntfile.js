@@ -6,18 +6,18 @@ module.exports = function(grunt) {
       options: {
         separator: ';'
       },
-      build: {
+      dist: {
         src: ['src/**/*.js'],
-        dest: 'build/<%= pkg.name %>.js'
+        dest: '<%= pkg.name %>.js'
       }
     },
     uglify: {
       options: {
         banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n'
       },
-      build: {
+      dist: {
         files: {
-          'build/<%= pkg.name %>.min.js': ['<%= concat.build.dest %>']
+          '<%= pkg.name %>.min.js': ['<%= concat.dist.dest %>']
         }
       }
     },
