@@ -21,12 +21,27 @@ module.exports = function(grunt) {
         }
       }
     },
+    karma: {
+      unit: {
+        options: {
+          frameworks: ['jasmine'],
+          browsers: ['Chrome', 'Firefox'],
+          singleRun: true,
+          files: [
+            'src/*.js',
+            'spec/*.js'
+          ]
+        }
+      }
+    },
     jasmine: {
       pivotal: {
         src: 'src/**/*.js',
         options: {
           specs: 'spec/*Spec.js',
-          helpers: 'spec/*Helper.js'
+          helpers: 'spec/*Helper.js',
+          outfile: 'SpecRunner.html',
+          keepRunner: true
         }
       }
     },
@@ -50,11 +65,12 @@ module.exports = function(grunt) {
 
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-contrib-jasmine');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-concat');
 
-  grunt.registerTask('test', ['jshint', 'jasmine']);
+  grunt.registerTask('test', ['jshint', 'karma']);
 
-  grunt.registerTask('default', ['jshint', 'jasmine', 'concat', 'uglify']);
+  grunt.registerTask('default', ['jshint', 'karma', 'concat', 'uglify']);
 };

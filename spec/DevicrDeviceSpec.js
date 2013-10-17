@@ -1,5 +1,14 @@
 describe("DevicrDevice", function() {
 
+  it("returns device name", function() {
+    var expected_device_name = "mobile";
+    var device = new DevicrDevice(expected_device_name, { getHeight: function() { return 2; }, getWidth: function() { return 3; } });
+
+    var device_name = device.getDevice();
+
+    expect(device_name).toEqual(expected_device_name);
+  });
+
   describe("gets screen height", function() {
 
     var screen_device, devicr = null;
@@ -21,7 +30,7 @@ describe("DevicrDevice", function() {
     it("to calculate if screen is in landscape mode", function() {
       devicr = new DevicrDevice('mobile', screen_device);
 
-      devicr.isLandscape();
+      devicr.isInLandscapeMode();
 
       expect(screen_device.getHeight).toHaveBeenCalled();
     });
@@ -29,7 +38,7 @@ describe("DevicrDevice", function() {
     it("to calculate if screen is in portrait mode", function() {
       devicr = new DevicrDevice('mobile', screen_device);
 
-      devicr.isPortrait();
+      devicr.isInPortraitMode();
       
       expect(screen_device.getHeight).toHaveBeenCalled();
     });
@@ -57,7 +66,7 @@ describe("DevicrDevice", function() {
     it("to calculate if screen is in landscape mode", function() {
       devicr = new DevicrDevice('mobile', screen_device);
 
-      devicr.isLandscape();
+      devicr.isInLandscapeMode();
 
       expect(screen_device.getWidth).toHaveBeenCalled();
     });
@@ -65,7 +74,7 @@ describe("DevicrDevice", function() {
     it("to calculate if screen is in portrait mode", function() {
       devicr = new DevicrDevice('mobile', screen_device);
 
-      devicr.isPortrait();
+      devicr.isInPortraitMode();
       
       expect(screen_device.getWidth).toHaveBeenCalled();
     });
@@ -87,7 +96,7 @@ describe("DevicrDevice", function() {
 
       devicr = new DevicrDevice('mobile', screen_device);
       
-      expect(devicr.isLandscape()).toBeTruthy();
+      expect(devicr.isInLandscapeMode()).toBeTruthy();
     });
 
   });
@@ -107,7 +116,7 @@ describe("DevicrDevice", function() {
 
       devicr = new DevicrDevice('mobile', screen_device);
       
-      expect(devicr.isPortrait()).toBeTruthy();
+      expect(devicr.isInPortraitMode()).toBeTruthy();
     });
 
     it("a device that the width is equal to the height", function() {
@@ -122,7 +131,7 @@ describe("DevicrDevice", function() {
 
       devicr = new DevicrDevice('mobile', screen_device);
       
-      expect(devicr.isPortrait()).toBeTruthy();
+      expect(devicr.isInPortraitMode()).toBeTruthy();
     });
 
   });
@@ -142,7 +151,7 @@ describe("DevicrDevice", function() {
 
       devicr = new DevicrDevice('mobile', screen_device);
       
-      expect(devicr.isLandscape()).toBeTruthy();
+      expect(devicr.isInLandscapeMode()).toBeTruthy();
     });
 
   });

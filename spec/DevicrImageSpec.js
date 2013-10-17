@@ -35,11 +35,11 @@ describe("DevicrImage", function() {
     expect(this.devicr_image.desktop()).toEqual(this.desktop_image);
   });
 
-  it("has a special image for retina devices", function() {
+  it("has a special image for devices that accepts retina pixel ratio", function() {
     expect(this.devicr_image.retina()).toEqual(this.retina_image);
   });
 
-  it("replaces current image for new image", function() {
+  it("replaces current image source for new image source", function() {
     new_image = "patata.jpeg";
 
     this.devicr_image.replaceImageLoadedBy(new_image);
