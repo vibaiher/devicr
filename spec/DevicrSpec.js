@@ -7,29 +7,29 @@ describe("Devicr", function() {
       replaceSourceWith: function(src) {}
     };
     this.devicr_image_selector = {
-      obtainBestSourceFor: function(devicr_image) {
+      getBestSourceFor: function(devicr_image) {
         return source;
       }
     };
     this.devicr = new Devicr(this.devicr_image_selector);
   });
 
-  it("obtains the best source for a image for the current device", function() {
+  it("gets the best source for a image for the current device", function() {
     // Arrange
-    spyOn(this.devicr_image_selector, 'obtainBestSourceFor');
+    spyOn(this.devicr_image_selector, 'getBestSourceFor');
 
     // Act
     this.devicr.adapt(this.devicr_image);
 
     // Expect
-    expect(this.devicr_image_selector.obtainBestSourceFor).toHaveBeenCalledWith(this.devicr_image);
+    expect(this.devicr_image_selector.getBestSourceFor).toHaveBeenCalledWith(this.devicr_image);
   });
 
   it("replaces current image with the best image for the current device", function() {
     // Arrange
     var devicr_src_image = 'mobile.jpg';
     spyOn(this.devicr_image, 'replaceSourceWith');
-    spyOn(this.devicr_image_selector, 'obtainBestSourceFor').andReturn(devicr_src_image);
+    spyOn(this.devicr_image_selector, 'getBestSourceFor').andReturn(devicr_src_image);
     
     // Act
     this.devicr.adapt(this.devicr_image);

@@ -40,7 +40,7 @@ describe("DevicrImageSelector", function() {
       spyOn(this.image, 'getImageFor').andReturn(image_src);
 
       // Act
-      var source = this.image_selector.obtainBestSourceFor(this.image);
+      var source = this.image_selector.getBestSourceFor(this.image);
 
       // Expect
       expect(this.image.getImageFor).toHaveBeenCalledWith(this.device.getDevice());
@@ -54,7 +54,7 @@ describe("DevicrImageSelector", function() {
       spyOn(this.image, 'getFirstHigherImageAvailable').andReturn(image_src);
 
       // Act
-      var source = this.image_selector.obtainBestSourceFor(this.image);
+      var source = this.image_selector.getBestSourceFor(this.image);
 
       // Expect
       expect(this.image.getFirstHigherImageAvailable).toHaveBeenCalled();
@@ -69,7 +69,7 @@ describe("DevicrImageSelector", function() {
       spyOn(this.image, 'getHighestImageAvailable').andReturn(image_src);
 
       // Act
-      var source = this.image_selector.obtainBestSourceFor(this.image);
+      var source = this.image_selector.getBestSourceFor(this.image);
 
       // Expect
       expect(this.image.getHighestImageAvailable).toHaveBeenCalled();
@@ -104,7 +104,7 @@ describe("DevicrImageSelector", function() {
         spyOn(this.image, 'getHighestImageAvailable').andReturn(image_src);
 
         // Act
-        var source = this.image_selector.obtainBestSourceFor(this.image);
+        var source = this.image_selector.getBestSourceFor(this.image);
 
         // Expect
         expect(this.image.getHighestImageAvailable).toHaveBeenCalled();
@@ -137,7 +137,7 @@ describe("DevicrImageSelector", function() {
         spyOn(this.image, 'getImageFor').andReturn(image_src);
 
         // Act
-        var source = this.image_selector.obtainBestSourceFor(this.image);
+        var source = this.image_selector.getBestSourceFor(this.image);
 
         // Expect
         expect(this.image.getImageFor).toHaveBeenCalledWith('desktop');
@@ -151,7 +151,7 @@ describe("DevicrImageSelector", function() {
         spyOn(this.image, 'getHighestImageAvailable').andReturn(image_src);
 
         // Act
-        var source = this.image_selector.obtainBestSourceFor(this.image);
+        var source = this.image_selector.getBestSourceFor(this.image);
 
         // Expect
         expect(this.image.getHighestImageAvailable).toHaveBeenCalled();

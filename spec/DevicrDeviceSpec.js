@@ -21,7 +21,7 @@ describe("DevicrDevice", function() {
         getWidth: function() {
           return 3;
         },
-      }
+      };
 
       spyOn(screen_device, 'getHeight');
       spyOn(screen_device, 'getWidth');
@@ -57,7 +57,7 @@ describe("DevicrDevice", function() {
         getWidth: function() {
           return 3;
         },
-      }
+      };
 
       spyOn(screen_device, 'getHeight');
       spyOn(screen_device, 'getWidth');
@@ -92,7 +92,7 @@ describe("DevicrDevice", function() {
         getWidth: function() {
           return 3;
         },
-      }
+      };
 
       devicr = new DevicrDevice('mobile', screen_device);
       
@@ -112,7 +112,7 @@ describe("DevicrDevice", function() {
         getWidth: function() {
           return 1;
         },
-      }
+      };
 
       devicr = new DevicrDevice('mobile', screen_device);
       
@@ -127,7 +127,7 @@ describe("DevicrDevice", function() {
         getWidth: function() {
           return 2;
         },
-      }
+      };
 
       devicr = new DevicrDevice('mobile', screen_device);
       
@@ -147,7 +147,7 @@ describe("DevicrDevice", function() {
         getWidth: function() {
           return 3;
         },
-      }
+      };
 
       devicr = new DevicrDevice('mobile', screen_device);
       
