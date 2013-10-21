@@ -4,7 +4,9 @@ describe("Devicr", function() {
 
   beforeEach(function () {
     this.devicr_image = {
-      replaceSourceWith: function(src) {}
+      replaceImageLoadedBy: function(src) {
+        return undefined;
+      }
     };
     this.devicr_image_selector = {
       getBestSourceFor: function(devicr_image) {
@@ -28,14 +30,14 @@ describe("Devicr", function() {
   it("replaces current image with the best image for the current device", function() {
     // Arrange
     var devicr_src_image = 'mobile.jpg';
-    spyOn(this.devicr_image, 'replaceSourceWith');
+    spyOn(this.devicr_image, 'replaceImageLoadedBy');
     spyOn(this.devicr_image_selector, 'getBestSourceFor').andReturn(devicr_src_image);
     
     // Act
     this.devicr.adapt(this.devicr_image);
 
     // Expect
-    expect(this.devicr_image.replaceSourceWith).toHaveBeenCalledWith(devicr_src_image);
+    expect(this.devicr_image.replaceImageLoadedBy).toHaveBeenCalledWith(devicr_src_image);
   });
 
 });

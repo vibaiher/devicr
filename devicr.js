@@ -28,7 +28,7 @@ ArrayIntersect.intersect = function(one, two) {
 
 Devicr.prototype.adapt = function(devicr_image) {
   var source = this.image_selector.getBestSourceFor(devicr_image);
-  devicr_image.replaceSourceWith(source);
+  devicr_image.replaceImageLoadedBy(source);
 };;function DevicrDevice(device, screen_device) {
   this.device = device;
   this.screen_device = screen_device;
