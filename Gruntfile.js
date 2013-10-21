@@ -29,7 +29,7 @@ module.exports = function(grunt) {
           singleRun: true,
           files: [
             'src/*.js',
-            'spec/*.js'
+            'test/**/*.js'
           ]
         }
       }
@@ -38,15 +38,15 @@ module.exports = function(grunt) {
       pivotal: {
         src: 'src/**/*.js',
         options: {
-          specs: 'spec/*Spec.js',
-          helpers: 'spec/*Helper.js',
+          specs: 'test/spec/*Spec.js',
+          helpers: 'test/spec/*Helper.js',
           outfile: 'SpecRunner.html',
           keepRunner: true
         }
       }
     },
     jshint: {
-      files: ['Gruntfile.js', 'src/**/*.js', 'spec/**/*.js'],
+      files: ['Gruntfile.js', 'src/**/*.js', 'test/**/*.js'],
       options: {
         // options here to override JSHint defaults
         globals: {

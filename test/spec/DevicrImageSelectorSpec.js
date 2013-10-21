@@ -1,16 +1,18 @@
 describe("DevicrImageSelector", function() {
 
-  var device, image, image_selector = null;
+  var device, image, image_finder, image_selector = null;
 
   beforeEach(function() {
     this.image = {
       getImageFor: function(device) {
         return src;
-      },
-      getFirstHigherImageAvailable: function() {
+      }
+    };
+    this.image_finder = {
+      findFirstHigherAvailableImage: function(image, device) {
         return retina_image;
       },
-      getHighestImageAvailable: function() {
+      findHighestAvailableImage: function(image) {
         return retina_image;
       }
     };
@@ -31,7 +33,7 @@ describe("DevicrImageSelector", function() {
         }
       };
       this.device = new DevicrDevice('whatever', screen_portrait_mode);
-      this.image_selector = new DevicrImageSelector(this.device);
+      this.image_selector = new DevicrImageSelector(this.device, this.image_finder);
     });
 
     it("gets the specific image device if it is available", function() {
@@ -50,29 +52,29 @@ describe("DevicrImageSelector", function() {
     it("gets the first higher image available if specific image device is undefined", function() {
       // Arrange
       var image_src = 'higher_device.jpg';
-      spyOn(this.image, 'getImageFor').andReturn(undefined);
-      spyOn(this.image, 'getFirstHigherImageAvailable').andReturn(image_src);
+      spyOn(this.image, 'getImageFor').andReturn(null);
+      spyOn(this.image_finder, 'findFirstHigherAvailableImage').andReturn(image_src);
 
       // Act
       var source = this.image_selector.getBestSourceFor(this.image);
 
       // Expect
-      expect(this.image.getFirstHigherImageAvailable).toHaveBeenCalled();
+      expect(this.image_finder.findFirstHigherAvailableImage).toHaveBeenCalledWith(this.image, this.device.getDevice());
       expect(source).toEqual(image_src);
     });
 
     it("gets the highest image available if specific image device and the first higher image are undefined", function() {
       // Arrange
       var image_src = 'tablet_device.jpg';
-      spyOn(this.image, 'getImageFor').andReturn(undefined);
-      spyOn(this.image, 'getFirstHigherImageAvailable').andReturn(undefined);
-      spyOn(this.image, 'getHighestImageAvailable').andReturn(image_src);
+      spyOn(this.image, 'getImageFor').andReturn(null);
+      spyOn(this.image_finder, 'findFirstHigherAvailableImage').andReturn(null);
+      spyOn(this.image_finder, 'findHighestAvailableImage').andReturn(image_src);
 
       // Act
       var source = this.image_selector.getBestSourceFor(this.image);
 
       // Expect
-      expect(this.image.getHighestImageAvailable).toHaveBeenCalled();
+      expect(this.image_finder.findHighestAvailableImage).toHaveBeenCalledWith(this.image);
       expect(source).toEqual(image_src);
     });
 
@@ -95,19 +97,19 @@ describe("DevicrImageSelector", function() {
           }
         };
         this.device = new DevicrDevice('whatever', screen_landscape_mode_with_retina_ratio);
-        this.image_selector = new DevicrImageSelector(this.device);
+        this.image_selector = new DevicrImageSelector(this.device, this.image_finder);
       });
 
       it("gets the highest image available", function() {
         // Arrange
         var image_src = 'tablet_device.jpg';
-        spyOn(this.image, 'getHighestImageAvailable').andReturn(image_src);
+        spyOn(this.image_finder, 'findHighestAvailableImage').andReturn(image_src);
 
         // Act
         var source = this.image_selector.getBestSourceFor(this.image);
 
         // Expect
-        expect(this.image.getHighestImageAvailable).toHaveBeenCalled();
+        expect(this.image_finder.findHighestAvailableImage).toHaveBeenCalledWith(this.image);
         expect(source).toEqual(image_src);
       });
 
@@ -128,7 +130,7 @@ describe("DevicrImageSelector", function() {
           }
         };
         this.device = new DevicrDevice('whatever', screen_landscape_mode);
-        this.image_selector = new DevicrImageSelector(this.device);
+        this.image_selector = new DevicrImageSelector(this.device, this.image_finder);
       });
       
       it("gets desktop image", function() {
@@ -147,14 +149,14 @@ describe("DevicrImageSelector", function() {
       it("gets the highest image available if desktop image is undefined", function() {
         // Arrange
         var image_src = 'tablet_device.jpg';
-        spyOn(this.image, 'getImageFor').andReturn(undefined);
-        spyOn(this.image, 'getHighestImageAvailable').andReturn(image_src);
+        spyOn(this.image, 'getImageFor').andReturn(null);
+        spyOn(this.image_finder, 'findHighestAvailableImage').andReturn(image_src);
 
         // Act
         var source = this.image_selector.getBestSourceFor(this.image);
 
         // Expect
-        expect(this.image.getHighestImageAvailable).toHaveBeenCalled();
+        expect(this.image_finder.findHighestAvailableImage).toHaveBeenCalledWith(this.image);
         expect(source).toEqual(image_src);
       });
 
