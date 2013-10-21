@@ -59,7 +59,7 @@ describe("DevicrImageSelector", function() {
       var source = this.image_selector.getBestSourceFor(this.image);
 
       // Expect
-      expect(this.image_finder.findFirstHigherAvailableImage).toHaveBeenCalledWith(this.image, this.device.getDevice());
+      expect(this.image_finder.findFirstHigherAvailableImage).toHaveBeenCalledWith(this.image);
       expect(source).toEqual(image_src);
     });
 

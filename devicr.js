@@ -149,7 +149,7 @@ DevicrImageSelector.prototype.getBestLandscapeSourceFor = function(devicr_image)
 DevicrImageSelector.prototype.getBestPortraitSourceFor = function(devicr_image) {
   var source = devicr_image.getImageFor(this.device.getDevice());
   if (source === null) {
-    source = this.finder.findFirstHigherAvailableImage(devicr_image, this.device.getDevice());
+    source = this.finder.findFirstHigherAvailableImage(devicr_image);
   }
   if (source === null) {
     return this.finder.findHighestAvailableImage(devicr_image);
