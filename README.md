@@ -4,11 +4,13 @@ Library to lazy load images depending of device (mobile, tablet or desktop) and 
 
 ##How to install?
 
-You don't need to install anything to use the library but you need install **[NodeJS](https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager)** to run grunt tasks like tests, jshint, concat and uglify:
+You need to install **[NodeJS](https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager)** and **bower** to manage dependencies and run grunt tasks like tests, jshint, concat and uglify:
 
 1. Run `npm install`
-2. Run `grunt`
-3. Enjoy
+2. Run `npm install -g bower`
+3. Run `bower install`
+4. Run `grunt`
+5. Enjoy
 
 ##How can I use it?
 
