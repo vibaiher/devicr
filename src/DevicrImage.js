@@ -11,7 +11,7 @@ function DevicrImage(image) {
       }
     }
     return higher_devices;
-  }
+  };
 }
 
 DevicrImage.prototype.imageLoaded = function() {
@@ -28,7 +28,7 @@ DevicrImage.prototype.replaceImageLoadedBy = function(image_path) {
 
 DevicrImage.prototype.getAvailableDevices = function() {
   var devices = this.devices, available_devices = [], source = null;
-  for (device in devices) {
+  for (var device in devices) {
     source = this.getImageFor(devices[device]);
     if (source !== null && source !== '') {
       available_devices.push(devices[device]);

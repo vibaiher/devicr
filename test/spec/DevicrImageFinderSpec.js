@@ -12,7 +12,7 @@ describe("DevicrImageFinder", function() {
         getImageFor: function(device) {
           return "source";
         }
-      }
+      };
       this.device = new DevicrDevice('whatever', {});
       this.finder = new DevicrImageFinder(this.device);
     });
@@ -97,7 +97,7 @@ describe("when is looking for the first of the higher image quality available", 
         getImageFor: function(device) {
           return "source";
         }
-      }
+      };
       this.device = new DevicrDevice('whatever', {});
       this.finder = new DevicrImageFinder(this.device);
     });
