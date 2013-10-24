@@ -1,0 +1,13 @@
+{
+  "name": "categorizr",
+  "homepage": "https://github.com/Skookum/categorizr.js",
+  "_release": "64c1a63788",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "64c1a6378851663052f57342e52775eea4d9f121"
+  },
+  "_source": "git://github.com/Skookum/categorizr.js.git",
+  "_target": "*",
+  "_originalSource": "git://github.com/Skookum/categorizr.js"
+}
