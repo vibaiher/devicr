@@ -28,3 +28,4 @@ You need to install **[NodeJS](https://github.com/joyent/node/wiki/Installing-No
     ```html
     <a class="devicr" mobile="/mobile.jpeg" tablet="/tablet.jpeg" desktop="/desktop.jpeg" retina="/retina.jpeg"></a>
     ```
+
