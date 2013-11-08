@@ -3,7 +3,7 @@ devicr
 
 JavaScript library to load different images suiting the device
 
-##How to install?
+##How to install for development?
 
 You need to install **[NodeJS](https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager)** and **bower** to manage dependencies and run grunt tasks like tests, jshint, concat and uglify:
 
