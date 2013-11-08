@@ -1,6 +1,7 @@
-#Devicr
+devicr
+======
 
-Library to lazy load images depending of device (mobile, tablet or desktop) and mode (landscape, portrait or retina)
+JavaScript library to load different images suiting the device
 
 ##How to install?
 
@@ -28,4 +29,3 @@ You need to install **[NodeJS](https://github.com/joyent/node/wiki/Installing-No
     ```html
     <a class="devicr" mobile="/mobile.jpeg" tablet="/tablet.jpeg" desktop="/desktop.jpeg" retina="/retina.jpeg"></a>
     ```
-
