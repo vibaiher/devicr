@@ -15,6 +15,7 @@ You need to install **[NodeJS](https://github.com/joyent/node/wiki/Installing-No
 
 ##How can I use it?
 
+
 1. Add a script tag in your html and load **devicr.min.js**
 2. Add a javascript tag like this:
     ```javascript
