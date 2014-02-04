@@ -22,9 +22,10 @@ You need to install **[NodeJS](https://github.com/joyent/node/wiki/Installing-No
     var selector = new DevicrImageSelector(device, new DevicrImageFinder(device));
     var devicr = new Devicr(selector);
     $('img.devicr').each(function() {
-        devicr.adapt(new DevicrImage(this));
+      devicr.adapt(new DevicrImage(this));
     });
     ```
+
 3. Add class devicr to your html, and a source for all devices you want like:
     ```html
     <a class="devicr" mobile="/mobile.jpeg" tablet="/tablet.jpeg" desktop="/desktop.jpeg" retina="/retina.jpeg"></a>
