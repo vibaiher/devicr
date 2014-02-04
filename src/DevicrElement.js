@@ -22,7 +22,7 @@ DevicrElement.prototype.getImageFor = function(device) {
   return this.element.getAttribute(device);
 };
 
-DevicrElement.prototype.replaceImageLoadedBy = function(image_path) {
+DevicrElement.prototype.replaceSourceLoadedBy = function(image_path) {
   this.element.setAttribute('src', image_path);
 };
 

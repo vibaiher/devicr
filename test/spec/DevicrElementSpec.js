@@ -42,7 +42,7 @@ describe("DevicrElement", function() {
     var new_image_source = "patata-2.jpeg";
 
     // Act
-    this.devicr_element.replaceImageLoadedBy(new_image_source);
+    this.devicr_element.replaceSourceLoadedBy(new_image_source);
     
     // Assert
     expect(this.devicr_element.imageLoaded()).toEqual(new_image_source);
