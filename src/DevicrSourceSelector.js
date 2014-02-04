@@ -22,22 +22,22 @@ DevicrSourceSelector.prototype.getBestLandscapeSourceFor = function(devicr_eleme
 DevicrSourceSelector.prototype.getBestPortraitSourceFor = function(devicr_element) {
   var source = devicr_element.getSourceFor(this.device.getDevice());
   if (source === null) {
-    source = this.finder.findFirstHigherAvailableImage(devicr_element);
+    source = this.finder.findFirstHigherAvailableSource(devicr_element);
   }
   if (source === null) {
-    return this.finder.findHighestAvailableImage(devicr_element);
+    return this.finder.findHighestAvailableSource(devicr_element);
   }
   return source;
 };
 
 DevicrSourceSelector.prototype.getBestLandscapeSourceWithRetinaDisplayFor = function(devicr_element) {
-  return this.finder.findHighestAvailableImage(devicr_element);
+  return this.finder.findHighestAvailableSource(devicr_element);
 };
 
 DevicrSourceSelector.prototype.getBestLandscapeSourceWithoutRetinaDisplayFor = function(devicr_element) {
   var source = devicr_element.getSourceFor('desktop');
   if (source === null) {
-    return this.finder.findHighestAvailableImage(devicr_element);
+    return this.finder.findHighestAvailableSource(devicr_element);
   }
   return source;
 };

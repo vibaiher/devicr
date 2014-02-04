@@ -9,10 +9,10 @@ describe("DevicrSourceSelector", function() {
       }
     };
     this.source_finder = {
-      findFirstHigherAvailableImage: function(element, device) {
+      findFirstHigherAvailableSource: function(element, device) {
         return retina_element;
       },
-      findHighestAvailableImage: function(element) {
+      findHighestAvailableSource: function(element) {
         return retina_element;
       }
     };
@@ -53,13 +53,13 @@ describe("DevicrSourceSelector", function() {
       // Arrange
       var element_src = 'higher_device.jpg';
       spyOn(this.element, 'getSourceFor').andReturn(null);
-      spyOn(this.source_finder, 'findFirstHigherAvailableImage').andReturn(element_src);
+      spyOn(this.source_finder, 'findFirstHigherAvailableSource').andReturn(element_src);
 
       // Act
       var source = this.source_selector.getBestSourceFor(this.element);
 
       // Expect
-      expect(this.source_finder.findFirstHigherAvailableImage).toHaveBeenCalledWith(this.element);
+      expect(this.source_finder.findFirstHigherAvailableSource).toHaveBeenCalledWith(this.element);
       expect(source).toEqual(element_src);
     });
 
@@ -67,14 +67,14 @@ describe("DevicrSourceSelector", function() {
       // Arrange
       var element_src = 'tablet_device.jpg';
       spyOn(this.element, 'getSourceFor').andReturn(null);
-      spyOn(this.source_finder, 'findFirstHigherAvailableImage').andReturn(null);
-      spyOn(this.source_finder, 'findHighestAvailableImage').andReturn(element_src);
+      spyOn(this.source_finder, 'findFirstHigherAvailableSource').andReturn(null);
+      spyOn(this.source_finder, 'findHighestAvailableSource').andReturn(element_src);
 
       // Act
       var source = this.source_selector.getBestSourceFor(this.element);
 
       // Expect
-      expect(this.source_finder.findHighestAvailableImage).toHaveBeenCalledWith(this.element);
+      expect(this.source_finder.findHighestAvailableSource).toHaveBeenCalledWith(this.element);
       expect(source).toEqual(element_src);
     });
 
@@ -103,13 +103,13 @@ describe("DevicrSourceSelector", function() {
       it("gets the highest element available", function() {
         // Arrange
         var element_src = 'tablet_device.jpg';
-        spyOn(this.source_finder, 'findHighestAvailableImage').andReturn(element_src);
+        spyOn(this.source_finder, 'findHighestAvailableSource').andReturn(element_src);
 
         // Act
         var source = this.source_selector.getBestSourceFor(this.element);
 
         // Expect
-        expect(this.source_finder.findHighestAvailableImage).toHaveBeenCalledWith(this.element);
+        expect(this.source_finder.findHighestAvailableSource).toHaveBeenCalledWith(this.element);
         expect(source).toEqual(element_src);
       });
 
@@ -150,13 +150,13 @@ describe("DevicrSourceSelector", function() {
         // Arrange
         var element_src = 'tablet_device.jpg';
         spyOn(this.element, 'getSourceFor').andReturn(null);
-        spyOn(this.source_finder, 'findHighestAvailableImage').andReturn(element_src);
+        spyOn(this.source_finder, 'findHighestAvailableSource').andReturn(element_src);
 
         // Act
         var source = this.source_selector.getBestSourceFor(this.element);
 
         // Expect
-        expect(this.source_finder.findHighestAvailableImage).toHaveBeenCalledWith(this.element);
+        expect(this.source_finder.findHighestAvailableSource).toHaveBeenCalledWith(this.element);
         expect(source).toEqual(element_src);
       });
 

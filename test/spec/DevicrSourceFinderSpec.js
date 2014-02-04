@@ -23,7 +23,7 @@ describe("DevicrSourceFinder", function() {
       spyOn(this.element, 'getSourceFor');
 
       // Act
-      this.finder.findHighestAvailableImage(this.element);
+      this.finder.findHighestAvailableSource(this.element);
 
       // Expect
       expect(this.element.getAvailableDevices).toHaveBeenCalled();
@@ -36,7 +36,7 @@ describe("DevicrSourceFinder", function() {
       spyOn(this.element, 'getSourceFor');
 
       // Act
-      this.finder.findHighestAvailableImage(this.element);
+      this.finder.findHighestAvailableSource(this.element);
 
       // Expect
       expect(this.element.getAvailableDevices).toHaveBeenCalledWith();
@@ -49,7 +49,7 @@ describe("DevicrSourceFinder", function() {
       spyOn(this.element, 'getSourceFor');
 
       // Act
-      this.finder.findHighestAvailableImage(this.element);
+      this.finder.findHighestAvailableSource(this.element);
 
       // Expect
       expect(this.element.getAvailableDevices).toHaveBeenCalled();
@@ -62,7 +62,7 @@ describe("DevicrSourceFinder", function() {
       spyOn(this.element, 'getSourceFor');
 
       // Act
-      this.finder.findHighestAvailableImage(this.element);
+      this.finder.findHighestAvailableSource(this.element);
 
       // Expect
       expect(this.element.getAvailableDevices).toHaveBeenCalled();
@@ -75,7 +75,7 @@ describe("DevicrSourceFinder", function() {
       spyOn(this.element, 'getSourceFor');
 
       // Act
-      var source = this.finder.findHighestAvailableImage(this.element);
+      var source = this.finder.findHighestAvailableSource(this.element);
 
       // Expect
       expect(this.element.getAvailableDevices).toHaveBeenCalled();
@@ -108,7 +108,7 @@ describe("when is looking for the first of the higher element quality available"
       spyOn(this.element, 'getSourceFor');
 
       // Act
-      var source = this.finder.findFirstHigherAvailableImage(this.element);
+      var source = this.finder.findFirstHigherAvailableSource(this.element);
 
       // Expect
       expect(this.element.getHigherAvailableDevicesThan).toHaveBeenCalledWith(this.device.getDevice());
@@ -121,7 +121,7 @@ describe("when is looking for the first of the higher element quality available"
       spyOn(this.element, 'getSourceFor');
 
       // Act
-      var source = this.finder.findFirstHigherAvailableImage(this.element);
+      var source = this.finder.findFirstHigherAvailableSource(this.element);
 
       // Expect
       expect(this.element.getHigherAvailableDevicesThan).toHaveBeenCalledWith(this.device.getDevice());
