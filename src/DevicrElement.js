@@ -1,7 +1,7 @@
-function DevicrImage(image) {
+function DevicrElement(element) {
   this.devices = ['retina', 'desktop', 'tablet', 'mobile'];
-  this.image = image;
-  this.image.removeAttribute('src');
+  this.element = element;
+  this.element.removeAttribute('src');
 
   this.getHigherDevices = function(device) {
     var device_index = this.devices.indexOf(device), higher_devices = [];
@@ -14,19 +14,19 @@ function DevicrImage(image) {
   };
 }
 
-DevicrImage.prototype.imageLoaded = function() {
-  return this.image.getAttribute('src');
+DevicrElement.prototype.imageLoaded = function() {
+  return this.element.getAttribute('src');
 };
 
-DevicrImage.prototype.getImageFor = function(device) {
-  return this.image.getAttribute(device);
+DevicrElement.prototype.getImageFor = function(device) {
+  return this.element.getAttribute(device);
 };
 
-DevicrImage.prototype.replaceImageLoadedBy = function(image_path) {
-  this.image.setAttribute('src', image_path);
+DevicrElement.prototype.replaceImageLoadedBy = function(image_path) {
+  this.element.setAttribute('src', image_path);
 };
 
-DevicrImage.prototype.getAvailableDevices = function() {
+DevicrElement.prototype.getAvailableDevices = function() {
   var devices = this.devices, available_devices = [], source = null;
   for (var device in devices) {
     source = this.getImageFor(devices[device]);
@@ -37,7 +37,7 @@ DevicrImage.prototype.getAvailableDevices = function() {
   return available_devices;
 };
 
-DevicrImage.prototype.getHigherAvailableDevicesThan = function(device) {
+DevicrElement.prototype.getHigherAvailableDevicesThan = function(device) {
   var higher_devices = this.getHigherDevices(device);
   if (higher_devices.length > 0) {
     var available_devices = this.getAvailableDevices();
