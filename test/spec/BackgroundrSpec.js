@@ -4,7 +4,7 @@ describe("Backgroundr", function() {
 
   beforeEach(function () {
     this.devicr_element = {
-      replaceBackgroundImageBy: function(src) {
+      replaceBackgroundSourceBy: function(src) {
         return undefined;
       }
     };
@@ -30,14 +30,14 @@ describe("Backgroundr", function() {
   it("replaces current image with the best image for the current device", function() {
     // Arrange
     var devicr_src_image = 'mobile.jpg';
-    spyOn(this.devicr_element, 'replaceBackgroundImageBy');
+    spyOn(this.devicr_element, 'replaceBackgroundSourceBy');
     spyOn(this.devicr_source_selector, 'getBestSourceFor').andReturn(devicr_src_image);
     
     // Act
     this.backgroundr.adapt(this.devicr_element);
 
     // Expect
-    expect(this.devicr_element.replaceBackgroundImageBy).toHaveBeenCalledWith(devicr_src_image);
+    expect(this.devicr_element.replaceBackgroundSourceBy).toHaveBeenCalledWith(devicr_src_image);
   });
 
 });

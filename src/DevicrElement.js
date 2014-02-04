@@ -18,12 +18,20 @@ DevicrElement.prototype.sourceLoaded = function() {
   return this.element.getAttribute('src');
 };
 
+DevicrElement.prototype.backgroundSourceLoaded = function() {
+  return this.element.style.backgroundImage;
+};
+
 DevicrElement.prototype.getSourceFor = function(device) {
   return this.element.getAttribute(device);
 };
 
-DevicrElement.prototype.replaceSourceLoadedBy = function(image_path) {
-  this.element.setAttribute('src', image_path);
+DevicrElement.prototype.replaceSourceLoadedBy = function(source) {
+  this.element.setAttribute('src', source);
+};
+
+DevicrElement.prototype.replaceBackgroundSourceBy = function(source) {
+  this.element.setAttribute('style', 'background-image: url(' + source + ');');
 };
 
 DevicrElement.prototype.getAvailableDevices = function() {

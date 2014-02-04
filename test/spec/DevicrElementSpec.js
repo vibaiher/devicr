@@ -48,6 +48,19 @@ describe("DevicrElement", function() {
     expect(this.devicr_element.sourceLoaded()).toEqual(new_image_source);
   });
 
+  it("replaces current element background source by new background source", function() {
+    // Arrange
+    var element = document.createElement('a');
+    var new_image_source = "patata-2.jpeg";
+    var devicr_element = new DevicrElement(element);
+
+    // Act
+    devicr_element.replaceBackgroundSourceBy(new_image_source);
+    
+    // Assert
+    expect(devicr_element.backgroundSourceLoaded()).toMatch(new RegExp(new_image_source));
+  });
+
   describe("when look for available devices", function() {
 
     it("gets all devices ordered by device priority if all devices have an image assigned", function() {
