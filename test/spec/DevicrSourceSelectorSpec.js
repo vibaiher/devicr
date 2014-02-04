@@ -4,7 +4,7 @@ describe("DevicrSourceSelector", function() {
 
   beforeEach(function() {
     this.element = {
-      getImageFor: function(device) {
+      getSourceFor: function(device) {
         return src;
       }
     };
@@ -39,20 +39,20 @@ describe("DevicrSourceSelector", function() {
     it("gets the specific element device if it is available", function() {
       // Arrange
       var element_src = 'device.jpg';
-      spyOn(this.element, 'getImageFor').andReturn(element_src);
+      spyOn(this.element, 'getSourceFor').andReturn(element_src);
 
       // Act
       var source = this.source_selector.getBestSourceFor(this.element);
 
       // Expect
-      expect(this.element.getImageFor).toHaveBeenCalledWith(this.device.getDevice());
+      expect(this.element.getSourceFor).toHaveBeenCalledWith(this.device.getDevice());
       expect(source).toEqual(element_src);
     });
 
     it("gets the first higher element available if specific element device is undefined", function() {
       // Arrange
       var element_src = 'higher_device.jpg';
-      spyOn(this.element, 'getImageFor').andReturn(null);
+      spyOn(this.element, 'getSourceFor').andReturn(null);
       spyOn(this.source_finder, 'findFirstHigherAvailableImage').andReturn(element_src);
 
       // Act
@@ -66,7 +66,7 @@ describe("DevicrSourceSelector", function() {
     it("gets the highest element available if specific element device and the first higher element are undefined", function() {
       // Arrange
       var element_src = 'tablet_device.jpg';
-      spyOn(this.element, 'getImageFor').andReturn(null);
+      spyOn(this.element, 'getSourceFor').andReturn(null);
       spyOn(this.source_finder, 'findFirstHigherAvailableImage').andReturn(null);
       spyOn(this.source_finder, 'findHighestAvailableImage').andReturn(element_src);
 
@@ -136,20 +136,20 @@ describe("DevicrSourceSelector", function() {
       it("gets desktop element", function() {
         // Arrange
         var element_src = 'desktop_device.jpg';
-        spyOn(this.element, 'getImageFor').andReturn(element_src);
+        spyOn(this.element, 'getSourceFor').andReturn(element_src);
 
         // Act
         var source = this.source_selector.getBestSourceFor(this.element);
 
         // Expect
-        expect(this.element.getImageFor).toHaveBeenCalledWith('desktop');
+        expect(this.element.getSourceFor).toHaveBeenCalledWith('desktop');
         expect(source).toEqual(element_src);
       });
 
       it("gets the highest element available if desktop element is undefined", function() {
         // Arrange
         var element_src = 'tablet_device.jpg';
-        spyOn(this.element, 'getImageFor').andReturn(null);
+        spyOn(this.element, 'getSourceFor').andReturn(null);
         spyOn(this.source_finder, 'findHighestAvailableImage').andReturn(element_src);
 
         // Act

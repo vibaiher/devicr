@@ -7,7 +7,7 @@ DevicrSourceFinder.prototype.findHighestAvailableImage = function(devicr_element
   if (available_devices.length === 0) {
     return null;
   }
-  return devicr_element.getImageFor(available_devices.shift());
+  return devicr_element.getSourceFor(available_devices.shift());
 };
 
 DevicrSourceFinder.prototype.findFirstHigherAvailableImage = function(devicr_element) {
@@ -15,5 +15,5 @@ DevicrSourceFinder.prototype.findFirstHigherAvailableImage = function(devicr_ele
   if (higher_available_devices.length === 0) {
     return null;
   }
-  return devicr_element.getImageFor(higher_available_devices.pop());
+  return devicr_element.getSourceFor(higher_available_devices.pop());
 };

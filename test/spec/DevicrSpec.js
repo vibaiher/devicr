@@ -16,7 +16,7 @@ describe("Devicr", function() {
     this.devicr = new Devicr(this.devicr_source_selector);
   });
 
-  it("gets the best source for a image for the current device", function() {
+  it("gets the best source for a element to the current device", function() {
     // Arrange
     spyOn(this.devicr_source_selector, 'getBestSourceFor');
 
@@ -27,7 +27,7 @@ describe("Devicr", function() {
     expect(this.devicr_source_selector.getBestSourceFor).toHaveBeenCalledWith(this.devicr_element);
   });
 
-  it("replaces current image with the best image for the current device", function() {
+  it("replaces current source with the best source to the current device", function() {
     // Arrange
     var devicr_src_image = 'mobile.jpg';
     spyOn(this.devicr_element, 'replaceSourceLoadedBy');

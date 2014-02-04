@@ -14,11 +14,11 @@ function DevicrElement(element) {
   };
 }
 
-DevicrElement.prototype.imageLoaded = function() {
+DevicrElement.prototype.sourceLoaded = function() {
   return this.element.getAttribute('src');
 };
 
-DevicrElement.prototype.getImageFor = function(device) {
+DevicrElement.prototype.getSourceFor = function(device) {
   return this.element.getAttribute(device);
 };
 
@@ -29,7 +29,7 @@ DevicrElement.prototype.replaceSourceLoadedBy = function(image_path) {
 DevicrElement.prototype.getAvailableDevices = function() {
   var devices = this.devices, available_devices = [], source = null;
   for (var device in devices) {
-    source = this.getImageFor(devices[device]);
+    source = this.getSourceFor(devices[device]);
     if (source !== null && source !== '') {
       available_devices.push(devices[device]);
     }
