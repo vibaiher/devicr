@@ -29,5 +29,5 @@ You need to install **[NodeJS](https://github.com/joyent/node/wiki/Installing-No
 
 3. Add class devicr to your html, and a source for all devices you want like:
     ```html
-    <a class="devicr" mobile="/mobile.jpeg" tablet="/tablet.jpeg" desktop="/desktop.jpeg" retina="/retina.jpeg"></a>
+    <img class="devicr" mobile="/mobile.jpeg" tablet="/tablet.jpeg" desktop="/desktop.jpeg" retina="/retina.jpeg"></a>
     ```
