@@ -1,11 +1,11 @@
-describe("DevicrImage", function() {
+describe("DevicrElement", function() {
 
-  var image, devicr_image = null;
+  var element, devicr_element = null;
 
   beforeEach(function() {
-    this.image = new Image();
-    this.image.setAttribute('src', 'any-src.jpg');
-    this.devicr_image = new DevicrImage(this.image);
+    this.element = new Image();
+    this.element.setAttribute('src', 'any-src.jpg');
+    this.devicr_element = new DevicrElement(this.element);
   });
 
   var prepareImageAttributes = function(image, expected_devices) {
@@ -21,17 +21,17 @@ describe("DevicrImage", function() {
     // Act
 
     // Assert
-    expect(this.devicr_image.imageLoaded()).toBeNull();
+    expect(this.devicr_element.sourceLoaded()).toBeNull();
   });
 
-  it("get specific device image if it is available", function() {
+  it("get specific device source if it is available", function() {
     // Arrange
     var device = 'my_device';
     var device_source = 'patata.jpg';
-    this.image.setAttribute(device, device_source);
+    this.element.setAttribute(device, device_source);
 
     // Act
-    var source = this.devicr_image.getImageFor(device);
+    var source = this.devicr_element.getSourceFor(device);
 
     // Assert
     expect(source).toEqual(device_source);
@@ -42,10 +42,23 @@ describe("DevicrImage", function() {
     var new_image_source = "patata-2.jpeg";
 
     // Act
-    this.devicr_image.replaceImageLoadedBy(new_image_source);
+    this.devicr_element.replaceSourceLoadedBy(new_image_source);
     
     // Assert
-    expect(this.devicr_image.imageLoaded()).toEqual(new_image_source);
+    expect(this.devicr_element.sourceLoaded()).toEqual(new_image_source);
+  });
+
+  it("replaces current element background source by new background source", function() {
+    // Arrange
+    var element = document.createElement('a');
+    var new_image_source = "patata-2.jpeg";
+    var devicr_element = new DevicrElement(element);
+
+    // Act
+    devicr_element.replaceBackgroundSourceBy(new_image_source);
+    
+    // Assert
+    expect(devicr_element.backgroundSourceLoaded()).toMatch(new RegExp(new_image_source));
   });
 
   describe("when look for available devices", function() {
@@ -54,10 +67,10 @@ describe("DevicrImage", function() {
       // Arrange
       var device = null;
       var expected_devices = ['retina', 'desktop', 'tablet', 'mobile'];
-      prepareImageAttributes(this.image, expected_devices);
+      prepareImageAttributes(this.element, expected_devices);
 
       // Act
-      var devices = this.devicr_image.getAvailableDevices();
+      var devices = this.devicr_element.getAvailableDevices();
 
       // Assert
       expect(devices).toEqual(expected_devices);
@@ -69,10 +82,10 @@ describe("DevicrImage", function() {
         // Arrange
         var device = null;
         var expected_devices = ['retina', 'tablet', 'mobile'];
-        prepareImageAttributes(this.image, expected_devices);
+        prepareImageAttributes(this.element, expected_devices);
 
         // Act
-        var devices = this.devicr_image.getAvailableDevices();
+        var devices = this.devicr_element.getAvailableDevices();
 
         // Assert
         expect(devices).toEqual(expected_devices);
@@ -82,12 +95,12 @@ describe("DevicrImage", function() {
         // Arrange
         var device = null;
         var expected_devices = ['retina', 'desktop', 'tablet', 'mobile'];
-        prepareImageAttributes(this.image, expected_devices);
+        prepareImageAttributes(this.element, expected_devices);
         var deleted_device = expected_devices.pop();
-        this.image.setAttribute(deleted_device, '');
+        this.element.setAttribute(deleted_device, '');
 
         // Act
-        var devices = this.devicr_image.getAvailableDevices();
+        var devices = this.devicr_element.getAvailableDevices();
 
         // Assert
         expect(devices).toEqual(expected_devices);
@@ -100,7 +113,7 @@ describe("DevicrImage", function() {
       var expected_devices = [];
 
       // Act
-      var devices = this.devicr_image.getAvailableDevices();
+      var devices = this.devicr_element.getAvailableDevices();
 
       // Assert
       expect(devices).toEqual(expected_devices);
@@ -114,10 +127,10 @@ describe("DevicrImage", function() {
       // Arrange
       var device = null;
       var expected_devices = ['retina', 'desktop', 'tablet'];
-      prepareImageAttributes(this.image, ['retina', 'desktop', 'tablet', 'mobile']);
+      prepareImageAttributes(this.element, ['retina', 'desktop', 'tablet', 'mobile']);
 
       // Act
-      var higher_devices = this.devicr_image.getHigherAvailableDevicesThan('mobile');
+      var higher_devices = this.devicr_element.getHigherAvailableDevicesThan('mobile');
 
       // Assert
       expect(higher_devices).toEqual(expected_devices);
@@ -127,7 +140,7 @@ describe("DevicrImage", function() {
       // Arrange
 
       // Act
-      var higher_devices = this.devicr_image.getHigherAvailableDevicesThan('mobile');
+      var higher_devices = this.devicr_element.getHigherAvailableDevicesThan('mobile');
 
       // Assert
       expect(higher_devices).toEqual([]);

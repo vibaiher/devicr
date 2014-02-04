@@ -1,43 +1,43 @@
 describe("Devicr", function() {
 
-  var devicr, devicr_image, devicr_image_selector = null;
+  var devicr, devicr_element, devicr_source_selector = null;
 
   beforeEach(function () {
-    this.devicr_image = {
-      replaceImageLoadedBy: function(src) {
+    this.devicr_element = {
+      replaceSourceLoadedBy: function(src) {
         return undefined;
       }
     };
-    this.devicr_image_selector = {
-      getBestSourceFor: function(devicr_image) {
+    this.devicr_source_selector = {
+      getBestSourceFor: function(devicr_element) {
         return source;
       }
     };
-    this.devicr = new Devicr(this.devicr_image_selector);
+    this.devicr = new Devicr(this.devicr_source_selector);
   });
 
-  it("gets the best source for a image for the current device", function() {
+  it("gets the best source for a element to the current device", function() {
     // Arrange
-    spyOn(this.devicr_image_selector, 'getBestSourceFor');
+    spyOn(this.devicr_source_selector, 'getBestSourceFor');
 
     // Act
-    this.devicr.adapt(this.devicr_image);
+    this.devicr.adapt(this.devicr_element);
 
     // Expect
-    expect(this.devicr_image_selector.getBestSourceFor).toHaveBeenCalledWith(this.devicr_image);
+    expect(this.devicr_source_selector.getBestSourceFor).toHaveBeenCalledWith(this.devicr_element);
   });
 
-  it("replaces current image with the best image for the current device", function() {
+  it("replaces current source with the best source to the current device", function() {
     // Arrange
     var devicr_src_image = 'mobile.jpg';
-    spyOn(this.devicr_image, 'replaceImageLoadedBy');
-    spyOn(this.devicr_image_selector, 'getBestSourceFor').andReturn(devicr_src_image);
+    spyOn(this.devicr_element, 'replaceSourceLoadedBy');
+    spyOn(this.devicr_source_selector, 'getBestSourceFor').andReturn(devicr_src_image);
     
     // Act
-    this.devicr.adapt(this.devicr_image);
+    this.devicr.adapt(this.devicr_element);
 
     // Expect
-    expect(this.devicr_image.replaceImageLoadedBy).toHaveBeenCalledWith(devicr_src_image);
+    expect(this.devicr_element.replaceSourceLoadedBy).toHaveBeenCalledWith(devicr_src_image);
   });
 
 });

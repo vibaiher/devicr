@@ -1,8 +1,8 @@
-function Devicr(devicr_image_selector) {
-  this.image_selector = devicr_image_selector;
+function Devicr(devicr_source_selector) {
+  this.source_selector = devicr_source_selector;
 }
 
-Devicr.prototype.adapt = function(devicr_image) {
-  var source = this.image_selector.getBestSourceFor(devicr_image);
-  devicr_image.replaceImageLoadedBy(source);
+Devicr.prototype.adapt = function(devicr_element) {
+  var source = this.source_selector.getBestSourceFor(devicr_element);
+  devicr_element.replaceSourceLoadedBy(source);
 };

@@ -22,13 +22,21 @@ ArrayIntersect.intersect = function(one, two) {
   }
 
   return result;
-};;function Devicr(devicr_image_selector) {
-  this.image_selector = devicr_image_selector;
+};;function Backgroundr(devicr_element_selector) {
+  this.source_selector = devicr_element_selector;
 }
 
-Devicr.prototype.adapt = function(devicr_image) {
-  var source = this.image_selector.getBestSourceFor(devicr_image);
-  devicr_image.replaceImageLoadedBy(source);
+Backgroundr.prototype.adapt = function(devicr_element) {
+  var source = this.source_selector.getBestSourceFor(devicr_element);
+  devicr_element.replaceBackgroundSourceBy(source);
+};
+;function Devicr(devicr_source_selector) {
+  this.source_selector = devicr_source_selector;
+}
+
+Devicr.prototype.adapt = function(devicr_element) {
+  var source = this.source_selector.getBestSourceFor(devicr_element);
+  devicr_element.replaceSourceLoadedBy(source);
 };;function DevicrDevice(device, screen_device) {
   this.device = device;
   this.screen_device = screen_device;
@@ -61,10 +69,10 @@ DevicrDevice.prototype.isInPortraitMode = function() {
 DevicrDevice.prototype.hasRetinaPixelRatio = function() {
   return this.screen_device.getDevicePixelRatio() > 1;
 };
-;function DevicrImage(image) {
+;function DevicrElement(element) {
   this.devices = ['retina', 'desktop', 'tablet', 'mobile'];
-  this.image = image;
-  this.image.removeAttribute('src');
+  this.element = element;
+  this.element.removeAttribute('src');
 
   this.getHigherDevices = function(device) {
     var device_index = this.devices.indexOf(device), higher_devices = [];
@@ -77,22 +85,30 @@ DevicrDevice.prototype.hasRetinaPixelRatio = function() {
   };
 }
 
-DevicrImage.prototype.imageLoaded = function() {
-  return this.image.getAttribute('src');
+DevicrElement.prototype.sourceLoaded = function() {
+  return this.element.getAttribute('src');
 };
 
-DevicrImage.prototype.getImageFor = function(device) {
-  return this.image.getAttribute(device);
+DevicrElement.prototype.backgroundSourceLoaded = function() {
+  return this.element.style.backgroundImage;
 };
 
-DevicrImage.prototype.replaceImageLoadedBy = function(image_path) {
-  this.image.setAttribute('src', image_path);
+DevicrElement.prototype.getSourceFor = function(device) {
+  return this.element.getAttribute(device);
 };
 
-DevicrImage.prototype.getAvailableDevices = function() {
+DevicrElement.prototype.replaceSourceLoadedBy = function(source) {
+  this.element.setAttribute('src', source);
+};
+
+DevicrElement.prototype.replaceBackgroundSourceBy = function(source) {
+  this.element.setAttribute('style', 'background-image: url(' + source + ');');
+};
+
+DevicrElement.prototype.getAvailableDevices = function() {
   var devices = this.devices, available_devices = [], source = null;
   for (var device in devices) {
-    source = this.getImageFor(devices[device]);
+    source = this.getSourceFor(devices[device]);
     if (source !== null && source !== '') {
       available_devices.push(devices[device]);
     }
@@ -100,74 +116,77 @@ DevicrImage.prototype.getAvailableDevices = function() {
   return available_devices;
 };
 
-DevicrImage.prototype.getHigherAvailableDevicesThan = function(device) {
+DevicrElement.prototype.getHigherAvailableDevicesThan = function(device) {
   var higher_devices = this.getHigherDevices(device);
   if (higher_devices.length > 0) {
     var available_devices = this.getAvailableDevices();
     return ArrayIntersect.intersect(higher_devices, available_devices);
   }
   return [];
-};;function DevicrImageFinder(devicr_device) {
+};
+;function DevicrSourceFinder(devicr_device) {
   this.devicr_device = devicr_device;
 }
 
-DevicrImageFinder.prototype.findHighestAvailableImage = function(devicr_image) {
-  var available_devices = devicr_image.getAvailableDevices();
+DevicrSourceFinder.prototype.findHighestAvailableSource = function(devicr_element) {
+  var available_devices = devicr_element.getAvailableDevices();
   if (available_devices.length === 0) {
     return null;
   }
-  return devicr_image.getImageFor(available_devices.shift());
+  return devicr_element.getSourceFor(available_devices.shift());
 };
 
-DevicrImageFinder.prototype.findFirstHigherAvailableImage = function(devicr_image) {
-  var higher_available_devices = devicr_image.getHigherAvailableDevicesThan(this.devicr_device.getDevice());
+DevicrSourceFinder.prototype.findFirstHigherAvailableSource = function(devicr_element) {
+  var higher_available_devices = devicr_element.getHigherAvailableDevicesThan(this.devicr_device.getDevice());
   if (higher_available_devices.length === 0) {
     return null;
   }
-  return devicr_image.getImageFor(higher_available_devices.pop());
-};;function DevicrImageSelector(devicr_device, devicr_image_finder) {
+  return devicr_element.getSourceFor(higher_available_devices.pop());
+};
+;function DevicrSourceSelector(devicr_device, devicr_source_finder) {
   this.device = devicr_device;
-  this.finder = devicr_image_finder;
+  this.finder = devicr_source_finder;
 }
 
-DevicrImageSelector.prototype.getBestSourceFor = function(devicr_image) {
+DevicrSourceSelector.prototype.getBestSourceFor = function(devicr_element) {
   var device = this.device.getDevice();
 
   if (this.device.isInLandscapeMode()) {
-    return this.getBestLandscapeSourceFor(devicr_image);
+    return this.getBestLandscapeSourceFor(devicr_element);
   }
-  return this.getBestPortraitSourceFor(devicr_image);
+  return this.getBestPortraitSourceFor(devicr_element);
 };
 
-DevicrImageSelector.prototype.getBestLandscapeSourceFor = function(devicr_image) {
+DevicrSourceSelector.prototype.getBestLandscapeSourceFor = function(devicr_element) {
   if (this.device.hasRetinaPixelRatio()) {
-    return this.getBestLandscapeSourceWithRetinaDisplayFor(devicr_image);
+    return this.getBestLandscapeSourceWithRetinaDisplayFor(devicr_element);
   }  
-  return this.getBestLandscapeSourceWithoutRetinaDisplayFor(devicr_image);
+  return this.getBestLandscapeSourceWithoutRetinaDisplayFor(devicr_element);
 };
 
-DevicrImageSelector.prototype.getBestPortraitSourceFor = function(devicr_image) {
-  var source = devicr_image.getImageFor(this.device.getDevice());
+DevicrSourceSelector.prototype.getBestPortraitSourceFor = function(devicr_element) {
+  var source = devicr_element.getSourceFor(this.device.getDevice());
   if (source === null) {
-    source = this.finder.findFirstHigherAvailableImage(devicr_image);
+    source = this.finder.findFirstHigherAvailableSource(devicr_element);
   }
   if (source === null) {
-    return this.finder.findHighestAvailableImage(devicr_image);
+    return this.finder.findHighestAvailableSource(devicr_element);
+  }
+  return source;
+};
+
+DevicrSourceSelector.prototype.getBestLandscapeSourceWithRetinaDisplayFor = function(devicr_element) {
+  return this.finder.findHighestAvailableSource(devicr_element);
+};
+
+DevicrSourceSelector.prototype.getBestLandscapeSourceWithoutRetinaDisplayFor = function(devicr_element) {
+  var source = devicr_element.getSourceFor('desktop');
+  if (source === null) {
+    return this.finder.findHighestAvailableSource(devicr_element);
   }
   return source;
 };
-
-DevicrImageSelector.prototype.getBestLandscapeSourceWithRetinaDisplayFor = function(devicr_image) {
-  return this.finder.findHighestAvailableImage(devicr_image);
-};
-
-DevicrImageSelector.prototype.getBestLandscapeSourceWithoutRetinaDisplayFor = function(devicr_image) {
-  var source = devicr_image.getImageFor('desktop');
-  if (source === null) {
-    return this.finder.findHighestAvailableImage(devicr_image);
-  }
-  return source;
-};;function ScreenDevice() {
+;function ScreenDevice() {
 
 }
 
