@@ -50,7 +50,7 @@ DevicrSourceSelector.prototype.getBestPortraitSourceForBigTablets = function(dev
   if (!this.device.hasRetinaPixelRatio()) {
     source = this.finder.findFirstHigherAvailableSource(devicr_element);
   }
-  if (source == null) {
+  if (source === null) {
     return this.finder.findHighestAvailableSource(devicr_element);
   }
   return source;

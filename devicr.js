@@ -58,6 +58,10 @@ DevicrDevice.prototype.isDesktop = function() {
   return this.device === 'desktop';
 };
 
+DevicrDevice.prototype.isATabletWithBigScreen = function() {
+  return this.isTablet() && (this.screen_device.getWidth() > 750);
+};
+
 DevicrDevice.prototype.isInLandscapeMode = function() {
   return this.screen_device.getHeight() < this.screen_device.getWidth();
 };
@@ -165,6 +169,9 @@ DevicrSourceSelector.prototype.getBestLandscapeSourceFor = function(devicr_eleme
 };
 
 DevicrSourceSelector.prototype.getBestPortraitSourceFor = function(devicr_element) {
+  if (this.device.isATabletWithBigScreen()) {
+    return this.getBestPortraitSourceForBigTablets(devicr_element);
+  }
   var source = devicr_element.getSourceFor(this.device.getDevice());
   if (source === null) {
     source = this.finder.findFirstHigherAvailableSource(devicr_element);
@@ -181,6 +188,17 @@ DevicrSourceSelector.prototype.getBestLandscapeSourceWithRetinaDisplayFor = func
 
 DevicrSourceSelector.prototype.getBestLandscapeSourceWithoutRetinaDisplayFor = function(devicr_element) {
   var source = devicr_element.getSourceFor('desktop');
+  if (source === null) {
+    return this.finder.findHighestAvailableSource(devicr_element);
+  }
+  return source;
+};
+
+DevicrSourceSelector.prototype.getBestPortraitSourceForBigTablets = function(devicr_element) {
+  var source = null;
+  if (!this.device.hasRetinaPixelRatio()) {
+    source = this.finder.findFirstHigherAvailableSource(devicr_element);
+  }
   if (source === null) {
     return this.finder.findHighestAvailableSource(devicr_element);
   }
