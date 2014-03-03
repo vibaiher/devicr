@@ -19,10 +19,6 @@ DevicrDevice.prototype.isDesktop = function() {
   return this.device === 'desktop';
 };
 
-DevicrDevice.prototype.isATabletWithBigScreen = function() {
-  return this.isTablet() && (this.screen_device.getWidth() > 750);
-};
-
 DevicrDevice.prototype.isInLandscapeMode = function() {
   return this.screen_device.getHeight() < this.screen_device.getWidth();
 };
