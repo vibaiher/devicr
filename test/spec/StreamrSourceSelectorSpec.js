@@ -1,4 +1,4 @@
-describe("DevicrSourceSelector", function() {
+describe("StreamrSourceSelector", function() {
 
   var device, element, source_finder, source_selector = null;
 
@@ -18,6 +18,89 @@ describe("DevicrSourceSelector", function() {
     };
   });
 
+  describe("for tablets in portrait mode with screens greater than 750px (width)", function() {
+
+    describe("wich accepts retina", function() {
+      
+      beforeEach(function () {
+        var screen_portrait_mode = {
+          getHeight: function() {
+            return 2048;
+          },
+          getWidth: function() {
+            return 1536;
+          },
+          getDevicePixelRatio: function() {
+            return 2;
+          }
+        };
+        this.device = new DevicrDevice('tablet', screen_portrait_mode);
+        this.source_selector = new StreamrSourceSelector(this.device, this.source_finder);
+      });
+
+      it("gets the highest element available", function() {
+        // Arrange
+        var element_src = 'retina_device.jpg';
+        spyOn(this.source_finder, 'findHighestAvailableSource').andReturn(element_src);
+
+        // Act
+        var source = this.source_selector.getBestSourceFor(this.element);
+
+        // Expect
+        expect(this.source_finder.findHighestAvailableSource).toHaveBeenCalledWith(this.element);
+        expect(source).toEqual(element_src);
+      });
+
+    });
+
+    describe("wich not accepts retina", function() {
+      
+      beforeEach(function () {
+        var screen_portrait_mode = {
+          getHeight: function() {
+            return 2048;
+          },
+          getWidth: function() {
+            return 1536;
+          },
+          getDevicePixelRatio: function() {
+            return 1;
+          }
+        };
+        this.device = new DevicrDevice('tablet', screen_portrait_mode);
+        this.source_selector = new StreamrSourceSelector(this.device, this.source_finder);
+      });
+
+      it("gets the first higher element available", function() {
+        // Arrange
+        var element_src = 'higher_device.jpg';
+        spyOn(this.source_finder, 'findFirstHigherAvailableSource').andReturn(element_src);
+
+        // Act
+        var source = this.source_selector.getBestSourceFor(this.element);
+
+        // Expect
+        expect(this.source_finder.findFirstHigherAvailableSource).toHaveBeenCalledWith(this.element);
+        expect(source).toEqual(element_src);
+      });
+
+      it("gets the highest element available if the first higher element is undefined", function() {
+        // Arrange
+        var element_src = 'tablet_device.jpg';
+        spyOn(this.source_finder, 'findFirstHigherAvailableSource').andReturn(null);
+        spyOn(this.source_finder, 'findHighestAvailableSource').andReturn(element_src);
+
+        // Act
+        var source = this.source_selector.getBestSourceFor(this.element);
+
+        // Expect
+        expect(this.source_finder.findHighestAvailableSource).toHaveBeenCalledWith(this.element);
+        expect(source).toEqual(element_src);
+      });
+    });
+
+  });
+
   describe("for portrait screen devices", function() {
 
     beforeEach(function () {
@@ -33,7 +116,7 @@ describe("DevicrSourceSelector", function() {
         }
       };
       this.device = new DevicrDevice('whatever', screen_portrait_mode);
-      this.source_selector = new DevicrSourceSelector(this.device, this.source_finder);
+      this.source_selector = new StreamrSourceSelector(this.device, this.source_finder);
     });
 
     it("gets the specific element device if it is available", function() {
@@ -80,7 +163,26 @@ describe("DevicrSourceSelector", function() {
 
   });
 
-  describe("for landscape screen devices", function() {
+  describe("for landscape screen devices that are mobile devices", function() {
+
+    it("gets mobile element", function() {
+      // Arrange
+      var device = new DevicrDevice('mobile', {});
+      var source_selector = new StreamrSourceSelector(device, this.source_finder);
+      var element_src = 'mobile_device.jpg';
+      spyOn(this.element, 'getSourceFor').andReturn(element_src);
+
+      // Act
+      var source = source_selector.getBestSourceFor(this.element);
+
+      // Expect
+      expect(this.element.getSourceFor).toHaveBeenCalledWith('mobile');
+      expect(source).toEqual(element_src);
+    });
+
+  });
+
+  describe("for landscape screen devices that aren't mobile devices", function() {
 
     describe("which accepts retina ratio", function() {
 
@@ -97,7 +199,7 @@ describe("DevicrSourceSelector", function() {
           }
         };
         this.device = new DevicrDevice('whatever', screen_landscape_mode_with_retina_ratio);
-        this.source_selector = new DevicrSourceSelector(this.device, this.source_finder);
+        this.source_selector = new StreamrSourceSelector(this.device, this.source_finder);
       });
 
       it("gets the highest element available", function() {
@@ -130,7 +232,7 @@ describe("DevicrSourceSelector", function() {
           }
         };
         this.device = new DevicrDevice('whatever', screen_landscape_mode);
-        this.source_selector = new DevicrSourceSelector(this.device, this.source_finder);
+        this.source_selector = new StreamrSourceSelector(this.device, this.source_finder);
       });
       
       it("gets desktop element", function() {
