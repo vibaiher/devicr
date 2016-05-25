@@ -3,20 +3,25 @@
   "version": "0.1.1",
   "devDependencies": {
     "grunt": "^1.0.1",
-    "grunt-contrib-jshint": "^1.0.0",
-    "grunt-contrib-jasmine": "^1.0.3",
     "grunt-contrib-concat": "^1.0.1",
-    "grunt-contrib-watch": "^1.0.0",
+    "grunt-contrib-jasmine": "^1.0.3",
+    "grunt-contrib-jshint": "^1.0.0",
     "grunt-contrib-uglify": "^1.0.1",
-    "karma-script-launcher": "^1.0.0",
-    "karma-firefox-launcher": "^1.0.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-karma": "^1.0.0",
+    "karma": "^0.13.22",
     "karma-chrome-launcher": "^1.0.1",
+    "karma-coffee-preprocessor": "^1.0.0",
+    "karma-firefox-launcher": "^1.0.0",
     "karma-html2js-preprocessor": "^1.0.0",
     "karma-jasmine": "^1.0.2",
-    "karma-requirejs": "^1.0.0",
-    "karma-coffee-preprocessor": "^1.0.0",
     "karma-phantomjs-launcher": "^1.0.0",
-    "karma": "^0.13.22",
-    "grunt-karma": "^1.0.0"
+    "karma-requirejs": "^1.0.0",
+    "karma-safari-launcher": "^1.0.0",
+    "karma-script-launcher": "^1.0.0",
+    "requirejs": "^2.2.0"
+  },
+  "scripts": {
+    "test": "./node_modules/.bin/karma start --single-run"
   }
 }
